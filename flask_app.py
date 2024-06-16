@@ -9,26 +9,6 @@ import numpy as np
 
 from key_generator.key_generator import generate
 import entidades as mdl
-'''
-#CONFIG
-#app = Flask(__name__)
-#app.config["DEBUG"] = True
-
-SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="root",
-    password="#Rfrr19072002",
-    hostname="localhost",
-    databasename="upcisitp$tp",
-)
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-
-#db = SQLAlchemy(app)
-#db.init_app(app)
-'''
-
 
 app.config['WTF_CSRF_ENABLED'] = False
 toast = Toastr(app)
@@ -51,6 +31,16 @@ def generate_key():
 
 @app.route('/', methods=["GET"])
 def index():
+    users = mdl.user.query.all()
+    
+    if len(users) == 0:
+        user = mdl.user(
+            userKey='WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ', 
+            descUser = ""
+        )
+        db.session.add(user)
+        db.session.commit()
+    
     return redirect(url_for('login'))
 
 @app.route('/login', methods=["GET"])

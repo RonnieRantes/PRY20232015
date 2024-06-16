@@ -6,20 +6,12 @@ from datetime import datetime
 #CONFIG
 app = Flask(__name__)
 app.config["DEBUG"] = True
-'''
-SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="upcisitp",
-    password="ronnie_21",
-    hostname="upcisitp.mysql.pythonanywhere-services.com",
-    databasename="upcisitp$tp",
-)
-'''
 
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="root",
-    password="root",
-    hostname="localhost",
-    databasename="upcisitp$tp",
+    username="Username de vista 'Databases'",
+    password="Contraseña guardada en vista 'Databases'",
+    hostname="'Database host address' de vista 'Databases'",
+    databasename="'Name' de vista 'Databases'",
 )
 
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
