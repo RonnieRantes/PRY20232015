@@ -9,6 +9,7 @@ import selenium.webdriver.support.expected_conditions as ec
 import undetected_chromedriver as uc
 import requests
 
+'''
 from time import sleep
 
 #CONFIG
@@ -26,7 +27,7 @@ woptions.add_experimental_option("excludeSwitches", ["enable-automation"])
 woptions.add_experimental_option('excludeSwitches', ['enable-logging'])
 woptions.add_experimental_option('useAutomationExtension', False)
 
-'''
+
 options.add_argument("--window-size=1920,1080")
 options.add_argument("--disable-extensions")
 options.add_argument("--proxy-server='direct://'")
@@ -35,7 +36,7 @@ options.add_argument("--start-maximized")
 options.add_argument('--disable-gpu')
 options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--no-sandbox')
-'''
+
 
 
 options  = uc.ChromeOptions()
@@ -47,11 +48,10 @@ driver = uc.Chrome(options=options)
 driver.set_script_timeout(10)
 
 #
-'''
 print("Cargando web...")
 driver.get("https://ruc.pe/consulta/")
 print("Web cargada!")
-'''
+
 wait = WebDriverWait(driver, 10)
 
 
@@ -117,6 +117,14 @@ def buscarRUC(ruc):
     rerun()
 
     out = '|'.join(lst)
+    return out
+
+'''
+def buscarRUC(ruc):
+    URL = "https://api.sunat.dev/ruc/" + ruc + "?apikey=wXQRSOaC7DbfnHQUsuYBFqnJ2BUxNGyhNMnhcWpDYpXL0ck4TcvDLhkoZjCLVEhG"
+    data = requests.get(url = URL).json()["body"]["datosContribuyente"]
+
+    out = data["desRazonSocial"] + "|" + data["codEstado"] + "|" + data["codDomHabido"] + "|" + " ".join(data["desDireccion"].split())
     return out
 
 def buscarRUCAPI(ruc):
