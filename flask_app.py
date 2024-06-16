@@ -36,17 +36,17 @@ def index():
 @app.route('/login', methods=["GET"])
 def login():
     try:
-        user = mdl.user.query.filter_by(userKey = 'WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ').first();
-       
-        if user is None:
-            user = mdl.user(
-                userKey='WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ', 
-                descUser = ""
-            )
-            db.session.add(user)
-            db.session.commit()
-        
         if session.get("const_user") is None:
+            user = mdl.user.query.filter_by(userKey = 'WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ').first();
+       
+            if user is None:
+                user = mdl.user(
+                    userKey='WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ', 
+                    descUser = ""
+                )
+                db.session.add(user)
+                db.session.commit()
+
             session['const_nombre'] = ""
             session['const_estado'] = ""
             session['const_habido'] = ""
