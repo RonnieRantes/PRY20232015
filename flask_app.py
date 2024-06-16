@@ -31,17 +31,21 @@ def generate_key():
 
 @app.route('/', methods=["GET"])
 def index():
-    users = mdl.user.query.all()
-    
-    if len(users) == 0:
-        user = mdl.user(
-            userKey='WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ', 
-            descUser = ""
-        )
-        db.session.add(user)
-        db.session.commit()
-    
-    return redirect(url_for('login'))
+    try:
+        users = mdl.user.query.all()
+        
+        if len(users) == 0:
+            user = mdl.user(
+                userKey='WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ', 
+                descUser = ""
+            )
+            db.session.add(user)
+            db.session.commit()
+        
+        return redirect(url_for('login'))
+
+    except:
+        return redirect(url_for('login'))
 
 @app.route('/login', methods=["GET"])
 def login():
