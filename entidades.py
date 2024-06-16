@@ -19,7 +19,7 @@ app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-app.app_context().push()
+#app.app_context().push()
 
 class user(db.Model):
     __tablename__ = "user"

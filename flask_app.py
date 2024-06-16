@@ -13,7 +13,7 @@ import entidades as mdl
 app.config['WTF_CSRF_ENABLED'] = False
 toast = Toastr(app)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-app.app_context().push()
+#app.app_context().push()
 
 #VIEWS
 @app.route('/generate-key', methods=["GET"])
