@@ -8,9 +8,9 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
+    hostname="'Database host address' de vista 'Databases'",
     username="Username de vista 'Databases'",
     password="Contraseña guardada en vista 'Databases'",
-    hostname="'Database host address' de vista 'Databases'",
     databasename="'Name' de vista 'Databases'",
 )
 
