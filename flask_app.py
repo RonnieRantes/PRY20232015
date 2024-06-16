@@ -36,9 +36,9 @@ def index():
 @app.route('/login', methods=["GET"])
 def login():
     try:
-        users = mdl.user.query.all()
-        
-        if len(users) == 0:
+        user = mdl.user.query.filter_by(userKey = 'WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ').first();
+       
+        if user is None:
             user = mdl.user(
                 userKey='WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ', 
                 descUser = ""
@@ -58,7 +58,8 @@ def login():
             return redirect(url_for('mantenimiento'))
 
     except:
-        return redirect(url_for('login'))
+        session['const_user'] = 'WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ'
+        return redirect(url_for('mantenimiento'))
     
 @app.route('/logout', methods=["GET"])
 def logout():
