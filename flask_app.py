@@ -58,6 +58,11 @@ def login():
             return redirect(url_for('mantenimiento'))
 
     except:
+        session['const_nombre'] = ""
+        session['const_estado'] = ""
+        session['const_habido'] = ""
+        session['const_direccion'] = ""
+        session['const_ruc_search'] = ""
         session['const_user'] = 'WWWWWWW-XXXXXXX-YYYYYYY-ZZZZZZZ'
         return redirect(url_for('mantenimiento'))
     
