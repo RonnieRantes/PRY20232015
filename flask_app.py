@@ -31,6 +31,10 @@ def generate_key():
 
 @app.route('/', methods=["GET"])
 def index():
+    return redirect(url_for('login'))
+
+@app.route('/login', methods=["GET"])
+def login():
     try:
         users = mdl.user.query.all()
         
@@ -42,33 +46,20 @@ def index():
             db.session.add(user)
             db.session.commit()
         
-        return redirect(url_for('login'))
+        if session.get("const_user") is None:
+            session['const_nombre'] = ""
+            session['const_estado'] = ""
+            session['const_habido'] = ""
+            session['const_direccion'] = ""
+            session['const_ruc_search'] = ""
+
+            return render_template("login.html")
+        else:
+            return redirect(url_for('mantenimiento'))
 
     except:
         return redirect(url_for('login'))
-
-@app.route('/login', methods=["GET"])
-def login():
-    if session.get("const_user") is None:
-        session['const_nombre'] = ""
-        session['const_estado'] = ""
-        session['const_habido'] = ""
-        session['const_direccion'] = ""
-        session['const_ruc_search'] = ""
-
-        '''
-        session['const_sector'] = ""
-        session['const_proveedor_seleccionado'] = ""
-        session['const_resultados_general_proveedores'] = ""
-        session['const_resultados_general_puntajes'] = ""
-        session['const_user'] = ""
-        session['const_sesion'] = ""
-        session['const_sesion_sector'] = ""
-        '''
-        return render_template("login.html")
-    else:
-        return redirect(url_for('mantenimiento'))
-
+    
 @app.route('/logout', methods=["GET"])
 def logout():
     session.pop("const_user", default=None)
